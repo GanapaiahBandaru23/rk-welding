@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+const dns = require("dns").promises;
+const net = require("net");
+
 const db = require("./config/db");
 const adminRoutes = require("./routes/adminRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
@@ -40,6 +43,76 @@ app.get("/test-db", async (req, res) => {
       error: error.code,
       errorNumber: error.errno,
       syscall: error.syscall,
+    });
+  }
+});
+
+app.get("/network-test", async (req, res) => {
+  const host = process.env.DB_HOST;
+  const port = Number(process.env.DB_PORT);
+
+  try {
+    const addresses = await dns.lookup(host, { all: true });
+
+    const results = [];
+
+    for (const address of addresses) {
+      const result = await new Promise((resolve) => {
+        const socket = new net.Socket();
+
+        const timer = setTimeout(() => {
+          socket.destroy();
+
+          resolve({
+            address: address.address,
+            family: address.family,
+            result: "TIMEOUT",
+          });
+        }, 10000);
+
+        socket.connect({
+          host: address.address,
+          port,
+          family: address.family,
+        });
+
+        socket.on("connect", () => {
+          clearTimeout(timer);
+          socket.destroy();
+
+          resolve({
+            address: address.address,
+            family: address.family,
+            result: "CONNECTED",
+          });
+        });
+
+        socket.on("error", (error) => {
+          clearTimeout(timer);
+          socket.destroy();
+
+          resolve({
+            address: address.address,
+            family: address.family,
+            result: error.code || error.message,
+          });
+        });
+      });
+
+      results.push(result);
+    }
+
+    res.json({
+      success: true,
+      host,
+      port,
+      addresses,
+      results,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.code || error.message,
     });
   }
 });
