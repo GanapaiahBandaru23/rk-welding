@@ -1,8 +1,5 @@
-
-
 const db = require("../config/db");
-const fs = require("fs");
-const path = require("path");
+const cloudinary = require("../config/cloudinary");
 
 // ADD WORK IMAGE
 const addWorkImage = async (req, res) => {
@@ -23,6 +20,7 @@ const addWorkImage = async (req, res) => {
       });
     }
 
+    // Check work exists
     const [work] = await db.query(
       "SELECT id FROM works WHERE id = ?",
       [work_id]
@@ -35,29 +33,53 @@ const addWorkImage = async (req, res) => {
       });
     }
 
-    const image_url =
-      `/uploads/works/${req.file.filename}`;
+    // Upload image to Cloudinary
+    const uploadResult = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        {
+          folder: "rk-welding/works",
+          resource_type: "image",
+        },
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        }
+      ).end(req.file.buffer);
+    });
 
+    // Cloudinary URL
+    const image_url = uploadResult.secure_url;
+
+    // Cloudinary Public ID
+    const public_id = uploadResult.public_id;
+
+    // Save image details in database
     const [result] = await db.query(
       `
       INSERT INTO work_images
-      (work_id, image_url, sort_order)
-      VALUES (?, ?, ?)
+      (work_id, image_url, public_id, sort_order)
+      VALUES (?, ?, ?, ?)
       `,
       [
         work_id,
         image_url,
+        public_id,
         sort_order || 0,
       ]
     );
 
     res.status(201).json({
       success: true,
-      message: "Work image added successfully",
+      message: "Work image uploaded to Cloudinary successfully",
+
       image: {
         id: result.insertId,
         work_id,
         image_url,
+        public_id,
         sort_order: sort_order || 0,
       },
     });
@@ -67,7 +89,7 @@ const addWorkImage = async (req, res) => {
 
     res.status(500).json({
       success: false,
-      message: "Failed to add work image",
+      message: "Failed to upload work image",
     });
   }
 };
@@ -84,6 +106,7 @@ const getWorkImages = async (req, res) => {
         id,
         work_id,
         image_url,
+        public_id,
         sort_order
       FROM work_images
       WHERE work_id = ?
@@ -113,9 +136,13 @@ const deleteWorkImage = async (req, res) => {
   try {
     const { id } = req.params;
 
+    // Get image details from database
     const [images] = await db.query(
       `
-      SELECT id, image_url
+      SELECT
+        id,
+        image_url,
+        public_id
       FROM work_images
       WHERE id = ?
       `,
@@ -131,33 +158,33 @@ const deleteWorkImage = async (req, res) => {
 
     const image = images[0];
 
-    // Delete image file from uploads folder
-    const filePath = path.join(
-      __dirname,
-      "..",
-      image.image_url
-    );
-
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    // Delete image from Cloudinary
+    if (image.public_id) {
+      await cloudinary.uploader.destroy(
+        image.public_id,
+        {
+          resource_type: "image",
+        }
+      );
     }
 
     // Delete image record from database
     await db.query(
-      "DELETE FROM work_images WHERE id = ?",
+      `
+      DELETE FROM work_images
+      WHERE id = ?
+      `,
       [id]
     );
 
     res.json({
       success: true,
-      message: "Work image deleted successfully",
+      message:
+        "Work image deleted from Cloudinary and database successfully",
     });
 
   } catch (error) {
-    console.error(
-      "Delete work image error:",
-      error
-    );
+    console.error("Delete work image error:", error);
 
     res.status(500).json({
       success: false,

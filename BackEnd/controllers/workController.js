@@ -1,11 +1,9 @@
 const db = require("../config/db");
-const fs = require("fs");
-const path = require("path");
+const cloudinary = require("../config/cloudinary");
 
-
-// ========================================
+// =====================================================
 // ADD WORK
-// ========================================
+// =====================================================
 const addWork = async (req, res) => {
   try {
     const {
@@ -18,20 +16,20 @@ const addWork = async (req, res) => {
       description,
     } = req.body;
 
+    // Required fields
     if (!work_id || !title || !category_id) {
       return res.status(400).json({
         success: false,
-        message:
-          "Work ID, title and category are required",
+        message: "work_id, title and category_id are required",
       });
     }
 
+    // Check category exists
     const [category] = await db.query(
       `
       SELECT id
       FROM categories
       WHERE id = ?
-        AND status = 'active'
       `,
       [category_id]
     );
@@ -43,6 +41,24 @@ const addWork = async (req, res) => {
       });
     }
 
+    // Check duplicate work_id
+    const [existingWork] = await db.query(
+      `
+      SELECT id
+      FROM works
+      WHERE work_id = ?
+      `,
+      [work_id]
+    );
+
+    if (existingWork.length > 0) {
+      return res.status(409).json({
+        success: false,
+        message: "Work ID already exists",
+      });
+    }
+
+    // Insert work
     const [result] = await db.query(
       `
       INSERT INTO works
@@ -71,7 +87,6 @@ const addWork = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Work added successfully",
-
       work: {
         id: result.insertId,
         work_id,
@@ -83,31 +98,20 @@ const addWork = async (req, res) => {
         description: description || null,
       },
     });
-
   } catch (error) {
-    console.error(
-      "Add work error:",
-      error
-    );
-
-    if (error.code === "ER_DUP_ENTRY") {
-      return res.status(409).json({
-        success: false,
-        message: "Work ID already exists",
-      });
-    }
+    console.error("Add work error:", error);
 
     res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Failed to add work",
     });
   }
 };
 
 
-// ========================================
-// GET ALL ACTIVE WORKS
-// ========================================
+// =====================================================
+// GET ALL WORKS
+// =====================================================
 const getWorks = async (req, res) => {
   try {
     const [works] = await db.query(
@@ -118,31 +122,24 @@ const getWorks = async (req, res) => {
         w.title,
         w.category_id,
         c.name AS category_name,
-        c.slug AS category_slug,
         w.work_type,
         w.size,
         w.location,
         w.description,
-        w.status,
         w.created_at,
 
         (
           SELECT wi.image_url
           FROM work_images wi
           WHERE wi.work_id = w.id
-          ORDER BY
-            wi.sort_order ASC,
-            wi.id ASC
+          ORDER BY wi.sort_order ASC, wi.id ASC
           LIMIT 1
         ) AS image_url
 
       FROM works w
 
-      INNER JOIN categories c
+      LEFT JOIN categories c
         ON w.category_id = c.id
-
-      WHERE w.status = 'active'
-        AND c.status = 'active'
 
       ORDER BY w.created_at DESC
       `
@@ -152,24 +149,20 @@ const getWorks = async (req, res) => {
       success: true,
       works,
     });
-
   } catch (error) {
-    console.error(
-      "Get works error:",
-      error
-    );
+    console.error("Get works error:", error);
 
     res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Failed to get works",
     });
   }
 };
 
 
-// ========================================
+// =====================================================
 // UPDATE WORK
-// ========================================
+// =====================================================
 const updateWork = async (req, res) => {
   try {
     const { workId } = req.params;
@@ -183,15 +176,8 @@ const updateWork = async (req, res) => {
       description,
     } = req.body;
 
-    if (!title || !category_id) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Work title and category are required",
-      });
-    }
-
-    const [work] = await db.query(
+    // Check work exists
+    const [existingWork] = await db.query(
       `
       SELECT id
       FROM works
@@ -200,30 +186,33 @@ const updateWork = async (req, res) => {
       [workId]
     );
 
-    if (work.length === 0) {
+    if (existingWork.length === 0) {
       return res.status(404).json({
         success: false,
         message: "Work not found",
       });
     }
 
-    const [category] = await db.query(
-      `
-      SELECT id
-      FROM categories
-      WHERE id = ?
-        AND status = 'active'
-      `,
-      [category_id]
-    );
+    // Check category
+    if (category_id) {
+      const [category] = await db.query(
+        `
+        SELECT id
+        FROM categories
+        WHERE id = ?
+        `,
+        [category_id]
+      );
 
-    if (category.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Category not found",
-      });
+      if (category.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "Category not found",
+        });
+      }
     }
 
+    // Update work
     await db.query(
       `
       UPDATE works
@@ -251,12 +240,8 @@ const updateWork = async (req, res) => {
       success: true,
       message: "Work updated successfully",
     });
-
   } catch (error) {
-    console.error(
-      "Update work error:",
-      error
-    );
+    console.error("Update work error:", error);
 
     res.status(500).json({
       success: false,
@@ -266,21 +251,19 @@ const updateWork = async (req, res) => {
 };
 
 
-// ========================================
+// =====================================================
 // DELETE WORK
-// ========================================
+// =====================================================
 const deleteWork = async (req, res) => {
   try {
     const { workId } = req.params;
 
-    // ------------------------------------
-    // 1. FIND WORK
-    // ------------------------------------
+    // Find work using numeric database ID
     const [works] = await db.query(
       `
       SELECT id
       FROM works
-      WHERE work_id = ?
+      WHERE id = ?
       `,
       [workId]
     );
@@ -292,156 +275,145 @@ const deleteWork = async (req, res) => {
       });
     }
 
-    const workDatabaseId = works[0].id;
+    const workDbId = works[0].id;
 
 
-    // ------------------------------------
-    // 2. GET ALL IMAGE FILE PATHS
-    // ------------------------------------
+    // ---------------------------------------------
+    // Get images
+    // ---------------------------------------------
     const [images] = await db.query(
       `
-      SELECT image_url
+      SELECT
+        id,
+        public_id
       FROM work_images
       WHERE work_id = ?
       `,
-      [workDatabaseId]
+      [workDbId]
     );
 
 
-    // ------------------------------------
-    // 3. GET ALL VIDEO FILE PATHS
-    // ------------------------------------
+    // ---------------------------------------------
+    // Get videos
+    // ---------------------------------------------
     const [videos] = await db.query(
       `
-      SELECT video_url
+      SELECT
+        id,
+        public_id
       FROM work_videos
       WHERE work_id = ?
       `,
-      [workDatabaseId]
+      [workDbId]
     );
 
 
-    // ------------------------------------
-    // 4. DELETE IMAGE FILES
-    // ------------------------------------
+    // ---------------------------------------------
+    // Delete images from Cloudinary
+    // ---------------------------------------------
     for (const image of images) {
-      if (!image.image_url) {
-        continue;
-      }
-
-      const filePath = path.join(
-        __dirname,
-        "..",
-        image.image_url
-      );
-
-      try {
-        if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
+      if (image.public_id) {
+        try {
+          await cloudinary.uploader.destroy(
+            image.public_id,
+            {
+              resource_type: "image",
+            }
+          );
+        } catch (cloudinaryError) {
+          console.error(
+            "Cloudinary image delete error:",
+            cloudinaryError
+          );
         }
-      } catch (fileError) {
-        console.error(
-          "Image file delete error:",
-          fileError
-        );
       }
     }
 
 
-    // ------------------------------------
-    // 5. DELETE VIDEO FILES
-    // ------------------------------------
+    // ---------------------------------------------
+    // Delete videos from Cloudinary
+    // ---------------------------------------------
     for (const video of videos) {
-      if (!video.video_url) {
-        continue;
-      }
-
-      const filePath = path.join(
-        __dirname,
-        "..",
-        video.video_url
-      );
-
-      try {
-        if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
+      if (video.public_id) {
+        try {
+          await cloudinary.uploader.destroy(
+            video.public_id,
+            {
+              resource_type: "video",
+            }
+          );
+        } catch (cloudinaryError) {
+          console.error(
+            "Cloudinary video delete error:",
+            cloudinaryError
+          );
         }
-      } catch (fileError) {
-        console.error(
-          "Video file delete error:",
-          fileError
-        );
       }
     }
 
 
-    // ------------------------------------
-    // 6. DELETE IMAGE DATABASE RECORDS
-    // ------------------------------------
+    // ---------------------------------------------
+    // Delete image records
+    // ---------------------------------------------
     await db.query(
       `
       DELETE FROM work_images
       WHERE work_id = ?
       `,
-      [workDatabaseId]
+      [workDbId]
     );
 
 
-    // ------------------------------------
-    // 7. DELETE VIDEO DATABASE RECORDS
-    // ------------------------------------
+    // ---------------------------------------------
+    // Delete video records
+    // ---------------------------------------------
     await db.query(
       `
       DELETE FROM work_videos
       WHERE work_id = ?
       `,
-      [workDatabaseId]
+      [workDbId]
     );
 
 
-    // ------------------------------------
-    // 8. DELETE WORK
-    // ------------------------------------
+    // ---------------------------------------------
+    // Delete work
+    // ---------------------------------------------
     await db.query(
       `
       DELETE FROM works
       WHERE id = ?
       `,
-      [workDatabaseId]
+      [workDbId]
     );
 
 
-    // ------------------------------------
-    // 9. SUCCESS RESPONSE
-    // ------------------------------------
     res.json({
       success: true,
       message:
-        "Work, photos and videos deleted successfully",
+        "Work, images and videos deleted successfully",
     });
-
   } catch (error) {
-    console.error(
-      "Delete work error:",
-      error
-    );
+    console.error("Delete work error:", error);
 
     res.status(500).json({
       success: false,
-      message:
-        "Failed to delete work",
+      message: "Failed to delete work",
     });
   }
 };
 
 
-// ========================================
+// =====================================================
 // GET SINGLE WORK DETAILS
-// ========================================
+// =====================================================
 const getWorkDetails = async (req, res) => {
   try {
     const { workId } = req.params;
 
+    // IMPORTANT:
+    // Frontend sends work_id like RW-TEST001
+    // So we search using w.work_id
     const [works] = await db.query(
       `
       SELECT
@@ -450,26 +422,24 @@ const getWorkDetails = async (req, res) => {
         w.title,
         w.category_id,
         c.name AS category_name,
-        c.slug AS category_slug,
         w.work_type,
         w.size,
         w.location,
         w.description,
-        w.status,
         w.created_at
 
       FROM works w
 
-      INNER JOIN categories c
+      LEFT JOIN categories c
         ON w.category_id = c.id
 
       WHERE w.work_id = ?
-        AND w.status = 'active'
-        AND c.status = 'active'
       `,
       [workId]
     );
 
+
+    // Work not found
     if (works.length === 0) {
       return res.status(404).json({
         success: false,
@@ -477,15 +447,20 @@ const getWorkDetails = async (req, res) => {
       });
     }
 
+
     const work = works[0];
 
 
-    // GET IMAGES
+    // ---------------------------------------------
+    // Get images
+    // ---------------------------------------------
     const [images] = await db.query(
       `
       SELECT
         id,
+        work_id,
         image_url,
+        public_id,
         sort_order
 
       FROM work_images
@@ -500,12 +475,16 @@ const getWorkDetails = async (req, res) => {
     );
 
 
-    // GET VIDEOS
+    // ---------------------------------------------
+    // Get videos
+    // ---------------------------------------------
     const [videos] = await db.query(
       `
       SELECT
         id,
+        work_id,
         video_url,
+        public_id,
         title
 
       FROM work_videos
@@ -518,29 +497,17 @@ const getWorkDetails = async (req, res) => {
     );
 
 
+    // ---------------------------------------------
+    // Send response
+    // ---------------------------------------------
     res.json({
       success: true,
 
-      work: {
-        id: work.id,
-        work_id: work.work_id,
-        title: work.title,
-        category_id: work.category_id,
-        category_name:
-          work.category_name,
-        category_slug:
-          work.category_slug,
-        work_type:
-          work.work_type,
-        size:
-          work.size,
-        location:
-          work.location,
-        description:
-          work.description,
-        images,
-        videos,
-      },
+      work,
+
+      images,
+
+      videos,
     });
 
   } catch (error) {
@@ -551,15 +518,15 @@ const getWorkDetails = async (req, res) => {
 
     res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Failed to get work details",
     });
   }
 };
 
 
-// ========================================
+// =====================================================
 // EXPORTS
-// ========================================
+// =====================================================
 module.exports = {
   addWork,
   getWorks,

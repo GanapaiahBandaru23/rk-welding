@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -627,7 +626,11 @@ function ManageWorkMedia() {
                 >
 
                   <img
-                    src={`${API_BASE_URL}${image.image_url}`}
+                    src={
+                      image.image_url.startsWith("http")
+                        ? image.image_url
+                        : `${API_BASE_URL}${image.image_url}`
+                    }
                     alt={work.title}
                   />
 
@@ -727,11 +730,15 @@ function ManageWorkMedia() {
                   <video
                     controls
                     preload="metadata"
+                    width="100%"
                   >
 
                     <source
-                      src={`${API_BASE_URL}${video.video_url}`}
-                      type="video/mp4"
+                      src={
+                        video.video_url.startsWith("http")
+                          ? video.video_url
+                          : `${API_BASE_URL}${video.video_url}`
+                      }
                     />
 
                     Your browser does not

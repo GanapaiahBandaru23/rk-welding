@@ -16,6 +16,26 @@ import "./WorkDetails.css";
 
 const API_BASE_URL = "http://localhost:5000";
 
+
+// ======================================================
+// MEDIA URL HELPER
+// ======================================================
+
+const getMediaUrl = (url) => {
+  if (!url) {
+    return "";
+  }
+
+  // Cloudinary / any external URL
+  if (url.startsWith("http")) {
+    return url;
+  }
+
+  // Old local uploads
+  return `${API_BASE_URL}${url}`;
+};
+
+
 function WorkDetails() {
   const { workId } = useParams();
 
@@ -26,6 +46,11 @@ function WorkDetails() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+
+  // ======================================================
+  // LOAD WORK DETAILS
+  // ======================================================
 
   useEffect(() => {
     const loadWorkDetails = async () => {
@@ -45,7 +70,11 @@ function WorkDetails() {
 
         setCurrentWork(work);
 
-        // Get all works for Similar Designs
+
+        // ==================================================
+        // GET ALL WORKS FOR SIMILAR DESIGNS
+        // ==================================================
+
         const worksData = await getWorks();
 
         if (worksData.success) {
@@ -60,23 +89,36 @@ function WorkDetails() {
           setSimilarWorks(similar);
         }
 
-        // Get work images
+
+        // ==================================================
+        // GET WORK IMAGES
+        // ==================================================
+
         const imageData = await getWorkImages(work.id);
 
         if (imageData.success) {
           setImages(imageData.images || []);
         }
 
-        // Get work videos
+
+        // ==================================================
+        // GET WORK VIDEOS
+        // ==================================================
+
         const videoData = await getWorkVideos(work.id);
 
         if (videoData.success) {
           setVideos(videoData.videos || []);
         }
+
       } catch (error) {
-        console.error("Work details loading error:", error);
+        console.error(
+          "Work details loading error:",
+          error
+        );
 
         setError("Unable to load work details");
+
       } finally {
         setLoading(false);
       }
@@ -85,36 +127,56 @@ function WorkDetails() {
     loadWorkDetails();
   }, [workId]);
 
-  // Loading
+
+  // ======================================================
+  // LOADING
+  // ======================================================
+
   if (loading) {
     return (
       <div className="work-details-page">
+
         <Navbar />
 
         <main>
+
           <section className="work-not-found">
+
             <div className="container">
+
               <p>LOADING</p>
 
               <h1>
                 Loading <span>work...</span>
               </h1>
+
             </div>
+
           </section>
+
         </main>
+
       </div>
     );
   }
 
-  // Error / Work not found
+
+  // ======================================================
+  // ERROR / WORK NOT FOUND
+  // ======================================================
+
   if (error || !currentWork) {
     return (
       <div className="work-details-page">
+
         <Navbar />
 
         <main>
+
           <section className="work-not-found">
+
             <div className="container">
+
               <p>WORK NOT FOUND</p>
 
               <h1>
@@ -132,20 +194,31 @@ function WorkDetails() {
               >
                 ← Back to Our Work
               </Link>
+
             </div>
+
           </section>
+
         </main>
+
       </div>
     );
   }
 
-  // Main image
+
+  // ======================================================
+  // MAIN IMAGE
+  // ======================================================
+
   const mainImage =
     images.length > 0
-      ? `${API_BASE_URL}${images[0].image_url}`
-      : currentWork.image_url
-        ? `${API_BASE_URL}${currentWork.image_url}`
-        : "";
+      ? getMediaUrl(images[0].image_url)
+      : getMediaUrl(currentWork.image_url);
+
+
+  // ======================================================
+  // PAGE
+  // ======================================================
 
   return (
     <div className="work-details-page">
@@ -154,9 +227,10 @@ function WorkDetails() {
 
       <main>
 
-        {/* =========================
+
+        {/* ==================================================
             HEADER
-        ========================= */}
+        ================================================== */}
 
         <section className="work-details-header">
 
@@ -179,9 +253,9 @@ function WorkDetails() {
         </section>
 
 
-        {/* =========================
+        {/* ==================================================
             WORK DETAILS
-        ========================= */}
+        ================================================== */}
 
         <section className="work-details-content">
 
@@ -189,29 +263,34 @@ function WorkDetails() {
 
             <div className="work-details-layout">
 
-              {/* =========================
+
+              {/* ==================================================
                   MAIN IMAGE
-              ========================= */}
+              ================================================== */}
 
               <div className="work-details-image">
 
                 {mainImage ? (
+
                   <img
                     src={mainImage}
                     alt={`${currentWork.title} by RK Welding`}
                   />
+
                 ) : (
+
                   <div className="work-image-placeholder">
                     {currentWork.title}
                   </div>
+
                 )}
 
               </div>
 
 
-              {/* =========================
+              {/* ==================================================
                   INFORMATION
-              ========================= */}
+              ================================================== */}
 
               <div className="work-details-info">
 
@@ -285,8 +364,9 @@ function WorkDetails() {
                     Call RK Welding
                   </a>
 
+
                   <a
-                    href={`https://wa.me/7036903065?text=${encodeURIComponent(
+                    href={`https://wa.me/917036903065?text=${encodeURIComponent(
                       `Hi RK Welding, I liked ${currentWork.title} (${currentWork.work_id}). I am interested in a similar design.`
                     )}`}
                     target="_blank"
@@ -307,9 +387,9 @@ function WorkDetails() {
         </section>
 
 
-        {/* =========================
+        {/* ==================================================
             ALL PHOTOS
-        ========================= */}
+        ================================================== */}
 
         {images.length > 0 && (
 
@@ -329,6 +409,7 @@ function WorkDetails() {
 
               </div>
 
+
               <div className="work-gallery-grid">
 
                 {images.map((image) => (
@@ -339,7 +420,7 @@ function WorkDetails() {
                   >
 
                     <img
-                      src={`${API_BASE_URL}${image.image_url}`}
+                      src={getMediaUrl(image.image_url)}
                       alt={`${currentWork.title} - RK Welding`}
                       loading="lazy"
                     />
@@ -357,9 +438,9 @@ function WorkDetails() {
         )}
 
 
-        {/* =========================
+        {/* ==================================================
             VIDEOS
-        ========================= */}
+        ================================================== */}
 
         {videos.length > 0 && (
 
@@ -379,6 +460,7 @@ function WorkDetails() {
 
               </div>
 
+
               <div className="work-video-grid">
 
                 {videos.map((video) => (
@@ -395,14 +477,14 @@ function WorkDetails() {
                     >
 
                       <source
-                        src={`${API_BASE_URL}${video.video_url}`}
-                        type="video/mp4"
+                        src={getMediaUrl(video.video_url)}
                       />
 
                       Your browser does not support
                       the video tag.
 
                     </video>
+
 
                     {video.title && (
                       <h3>
@@ -423,9 +505,9 @@ function WorkDetails() {
         )}
 
 
-        {/* =========================
+        {/* ==================================================
             SIMILAR DESIGNS
-        ========================= */}
+        ================================================== */}
 
         <section className="similar-designs">
 
@@ -452,13 +534,17 @@ function WorkDetails() {
 
                   <WorkCard
                     key={work.work_id}
+
                     image={
                       work.image_url
-                        ? `${API_BASE_URL}${work.image_url}`
+                        ? getMediaUrl(work.image_url)
                         : ""
                     }
+
                     title={work.title}
+
                     category={work.category_name}
+
                     workId={work.work_id}
                   />
 
@@ -471,7 +557,8 @@ function WorkDetails() {
               <div className="similar-placeholder">
 
                 <p>
-                  More {(
+                  More{" "}
+                  {(
                     currentWork.work_type ||
                     "fabrication"
                   ).toLowerCase()}{" "}
@@ -488,9 +575,9 @@ function WorkDetails() {
         </section>
 
 
-        {/* =========================
+        {/* ==================================================
             FINAL CTA
-        ========================= */}
+        ================================================== */}
 
         <section className="work-details-cta">
 
@@ -513,6 +600,7 @@ function WorkDetails() {
               measurements and fabrication requirements.
             </p>
 
+
             <div className="work-details-cta-buttons">
 
               <a
@@ -522,8 +610,9 @@ function WorkDetails() {
                 Call RK Welding
               </a>
 
+
               <a
-                href="https://wa.me/7036903065"
+                href="https://wa.me/917036903065"
                 target="_blank"
                 rel="noreferrer"
                 className="work-whatsapp-button"
@@ -544,4 +633,3 @@ function WorkDetails() {
 }
 
 export default WorkDetails;
-

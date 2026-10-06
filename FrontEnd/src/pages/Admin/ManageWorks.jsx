@@ -257,7 +257,7 @@ function ManageWorks() {
               {works.map((work) => (
 
                 <div
-                  key={work.work_id}
+                  key={work.id}
                   style={{
                     background: "#ffffff",
                     borderRadius: "14px",
@@ -279,7 +279,13 @@ function ManageWorks() {
                     {work.image_url ? (
 
                       <img
-                        src={`http://localhost:5000${work.image_url}`}
+                        src={
+                          work.image_url.startsWith(
+                            "http"
+                          )
+                            ? work.image_url
+                            : `http://localhost:5000${work.image_url}`
+                        }
                         alt={work.title}
                         style={{
                           width: "100%",
@@ -427,7 +433,7 @@ function ManageWorks() {
                       type="button"
                       onClick={() =>
                         handleDeleteWork(
-                          work.work_id,
+                          work.id,
                           work.title
                         )
                       }

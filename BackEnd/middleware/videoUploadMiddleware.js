@@ -1,49 +1,24 @@
 const multer = require("multer");
-const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(
-      null,
-      path.join(__dirname, "../uploads/videos")
-    );
-  },
-
-  filename: (req, file, cb) => {
-    const uniqueName =
-      Date.now() +
-      "-" +
-      Math.round(Math.random() * 1e9);
-
-    cb(
-      null,
-      uniqueName +
-        path.extname(file.originalname)
-    );
-  },
-});
+const storage = multer.memoryStorage();
 
 const uploadVideo = multer({
   storage: storage,
 
   limits: {
-    fileSize: 50 * 1024 * 1024,
+    fileSize: 50 * 1024 * 1024, // 50 MB
   },
 
   fileFilter: (req, file, cb) => {
-    const allowedTypes =
-      /mp4|webm|mov|avi|mkv/;
+    const allowedTypes = [
+      "video/mp4",
+      "video/webm",
+      "video/quicktime",
+      "video/x-msvideo",
+      "video/x-matroska",
+    ];
 
-    const extname = allowedTypes.test(
-      path
-        .extname(file.originalname)
-        .toLowerCase()
-    );
-
-    const mimetype =
-      file.mimetype.startsWith("video/");
-
-    if (extname && mimetype) {
+    if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
       cb(
