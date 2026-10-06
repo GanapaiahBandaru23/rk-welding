@@ -1,0 +1,589 @@
+/* ================= HERO ================= */
+
+.experience-hero {
+  min-height: 70vh;
+  padding: 180px 0 100px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("/images/hero/hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+}
+
+.experience-hero-label {
+  color: #f59e0b;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 20px;
+}
+
+.experience-hero h1 {
+  max-width: 850px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(48px, 7vw, 86px);
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  margin-bottom: 30px;
+}
+
+.experience-hero h1 span {
+  color: #f59e0b;
+}
+
+.experience-hero-description {
+  max-width: 650px;
+
+  color: #d4d4d4;
+
+  font-size: 18px;
+
+  line-height: 1.8;
+}
+
+
+/* ================= INTRO ================= */
+
+.experience-intro {
+  background: #0a0a0a;
+
+  padding: 120px 0;
+}
+
+.experience-intro-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 80px;
+
+  align-items: center;
+}
+
+.experience-intro-content {
+  max-width: 600px;
+}
+
+.experience-label {
+  color: #f59e0b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 18px;
+}
+
+.experience-intro-content h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(40px, 5vw, 64px);
+
+  line-height: 1.1;
+
+  margin-bottom: 30px;
+}
+
+.experience-intro-content p:not(.experience-label) {
+  color: #a3a3a3;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+
+  margin-bottom: 18px;
+}
+
+
+/* ================= HIGHLIGHT CARDS ================= */
+
+.experience-highlight {
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 15px;
+}
+
+.experience-highlight-card {
+  padding: 25px 30px;
+
+  background: #151515;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.experience-highlight-card:hover {
+  transform: translateX(6px);
+
+  border-color: rgba(245, 158, 11, 0.5);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.experience-highlight-card span {
+  color: #f59e0b;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.experience-highlight-card h3 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 23px;
+
+  margin-top: 12px;
+
+  margin-bottom: 8px;
+}
+
+.experience-highlight-card p {
+  color: #8f8f8f;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* ================= AREAS ================= */
+
+.experience-areas {
+  background: #111111;
+
+  padding: 120px 0;
+}
+
+.experience-heading {
+  max-width: 700px;
+
+  margin-bottom: 55px;
+}
+
+.experience-heading p {
+  color: #f59e0b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 15px;
+}
+
+.experience-heading h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(40px, 5vw, 64px);
+
+  line-height: 1.1;
+}
+
+.experience-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.experience-card {
+  min-height: 270px;
+
+  padding: 30px;
+
+  background: #151515;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(245, 158, 11, 0.5);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.experience-card > span {
+  color: #f59e0b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.experience-card h3 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 23px;
+
+  margin-top: 55px;
+
+  margin-bottom: 15px;
+}
+
+.experience-card p {
+  color: #a3a3a3;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+
+/* ================= PROCESS ================= */
+
+.experience-process {
+  background: #0a0a0a;
+
+  padding: 120px 0;
+}
+
+.experience-process-heading {
+  max-width: 700px;
+
+  margin-bottom: 60px;
+}
+
+.experience-process-heading p {
+  color: #f59e0b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 15px;
+}
+
+.experience-process-heading h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(40px, 5vw, 64px);
+
+  line-height: 1.1;
+}
+
+.experience-process-list {
+  max-width: 900px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-process-item {
+  display: grid;
+
+  grid-template-columns: 80px 1fr;
+
+  gap: 30px;
+
+  padding: 30px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-process-item > span {
+  color: #f59e0b;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  padding-top: 5px;
+}
+
+.experience-process-item h3 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 25px;
+
+  margin-bottom: 8px;
+}
+
+.experience-process-item p {
+  color: #8f8f8f;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  max-width: 650px;
+}
+
+
+/* ================= CTA ================= */
+
+.experience-cta {
+  background: #111111;
+
+  padding: 120px 0;
+
+  text-align: center;
+}
+
+.experience-cta .container {
+  max-width: 850px;
+}
+
+.experience-cta > .container > p:first-child {
+  color: #f59e0b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 20px;
+}
+
+.experience-cta h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(40px, 6vw, 70px);
+
+  line-height: 1.1;
+
+  margin-bottom: 25px;
+}
+
+.experience-cta h2 span {
+  color: #f59e0b;
+}
+
+.experience-cta h2 + p {
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  color: #a3a3a3;
+
+  font-size: 17px;
+
+  line-height: 1.8;
+}
+
+.experience-cta-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-top: 35px;
+
+  flex-wrap: wrap;
+}
+
+.experience-call-button,
+.experience-whatsapp-button {
+  display: inline-block;
+
+  padding: 14px 25px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+}
+
+.experience-call-button {
+  background: #f59e0b;
+
+  color: #000;
+}
+
+.experience-call-button:hover {
+  background: #ffffff;
+}
+
+.experience-whatsapp-button {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  color: #ffffff;
+}
+
+.experience-whatsapp-button:hover {
+  border-color: #f59e0b;
+
+  color: #f59e0b;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1000px) {
+
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+  .experience-hero {
+    min-height: 65vh;
+  }
+
+  .experience-intro-grid {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+  .experience-hero {
+    min-height: 75vh;
+
+    padding: 140px 0 80px;
+  }
+
+  .experience-hero h1 {
+    font-size: 48px;
+  }
+
+  .experience-hero-description {
+    font-size: 16px;
+  }
+
+
+  .experience-intro {
+    padding: 80px 0;
+  }
+
+  .experience-intro-content h2 {
+    font-size: 40px;
+  }
+
+  .experience-intro-content p:not(.experience-label) {
+    font-size: 15px;
+  }
+
+
+  .experience-highlight-card {
+    padding: 22px;
+  }
+
+
+  .experience-areas {
+    padding: 80px 0;
+  }
+
+  .experience-heading {
+    margin-bottom: 40px;
+  }
+
+  .experience-heading h2 {
+    font-size: 40px;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .experience-process {
+    padding: 80px 0;
+  }
+
+  .experience-process-heading {
+    margin-bottom: 40px;
+  }
+
+  .experience-process-heading h2 {
+    font-size: 40px;
+  }
+
+  .experience-process-item {
+    grid-template-columns: 50px 1fr;
+
+    gap: 15px;
+
+    padding: 25px 0;
+  }
+
+  .experience-process-item h3 {
+    font-size: 21px;
+  }
+
+  .experience-process-item p {
+    font-size: 14px;
+  }
+
+
+  .experience-cta {
+    padding: 80px 0;
+  }
+
+  .experience-cta h2 {
+    font-size: 42px;
+  }
+
+  .experience-cta-buttons {
+    flex-direction: column;
+  }
+
+  .experience-call-button,
+  .experience-whatsapp-button {
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,174 @@
+.admin-dashboard-page {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: #f5f6f8;
+  box-sizing: border-box;
+}
+
+.admin-dashboard-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.admin-dashboard-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.admin-dashboard-label {
+  margin: 0 0 10px;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.admin-dashboard-header h1 {
+  margin: 0 0 12px;
+  color: #111827;
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.admin-dashboard-header > p:last-child {
+  margin: 0;
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* DASHBOARD GRID */
+
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+
+/* CARD */
+
+.admin-dashboard-card {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.admin-dashboard-card h2 {
+  margin: 0 0 12px;
+  color: #111827;
+  font-size: 23px;
+  line-height: 1.3;
+}
+
+.admin-dashboard-card p {
+  min-height: 52px;
+  margin: 0 0 22px;
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* CARD BUTTON */
+
+.admin-dashboard-card button {
+  width: 100%;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-dashboard-card button:hover {
+  background: #374151;
+  transform: translateY(-1px);
+}
+
+
+/* FOOTER */
+
+.admin-dashboard-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.admin-logout-button {
+  padding: 12px 28px;
+  border: 1px solid #dc2626;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #dc2626;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-logout-button:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+
+/* TABLET */
+
+@media (max-width: 800px) {
+  .admin-dashboard-page {
+    padding: 45px 18px;
+  }
+
+  .admin-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dashboard-header h1 {
+    font-size: 34px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+  .admin-dashboard-page {
+    padding: 35px 15px;
+  }
+
+  .admin-dashboard-header {
+    margin-bottom: 30px;
+  }
+
+  .admin-dashboard-header h1 {
+    font-size: 30px;
+  }
+
+  .admin-dashboard-header > p:last-child {
+    font-size: 14px;
+  }
+
+  .admin-dashboard-card {
+    padding: 22px;
+  }
+
+  .admin-dashboard-card h2 {
+    font-size: 21px;
+  }
+
+  .admin-dashboard-card p {
+    font-size: 14px;
+  }
+}

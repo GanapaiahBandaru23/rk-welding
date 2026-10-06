@@ -1,0 +1,234 @@
+.add-work-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+.add-work-header {
+  background: #111827;
+  color: white;
+  padding: 50px 20px;
+}
+
+.add-work-header .container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.add-work-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.add-work-header h1 {
+  font-size: 38px;
+  margin: 0 0 12px;
+}
+
+.add-work-header p:last-child {
+  margin: 0;
+  color: #d1d5db;
+  font-size: 16px;
+}
+
+/* ==============================
+   FORM SECTION
+============================== */
+
+.add-work-section {
+  padding: 50px 20px;
+}
+
+.add-work-section .container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.add-work-form {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ==============================
+   FORM GRID
+============================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* ==============================
+   IMAGE UPLOAD
+============================== */
+
+.form-group input[type="file"] {
+  padding: 12px;
+  cursor: pointer;
+  background: #f9fafb;
+}
+
+.form-group input[type="file"]:hover {
+  border-color: #111827;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 7px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.form-group p {
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+  padding-top: 25px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-button,
+.save-button {
+  border: none;
+  padding: 13px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-button {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.cancel-button:hover {
+  background: #d1d5db;
+}
+
+.save-button {
+  background: #111827;
+  color: #ffffff;
+}
+
+.save-button:hover {
+  background: #000000;
+}
+
+.cancel-button:disabled,
+.save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 768px) {
+  .add-work-header {
+    padding: 35px 18px;
+  }
+
+  .add-work-header h1 {
+    font-size: 30px;
+  }
+
+  .add-work-section {
+    padding: 30px 15px;
+  }
+
+  .add-work-form {
+    padding: 25px 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .cancel-button,
+  .save-button {
+    width: 100%;
+  }
+}

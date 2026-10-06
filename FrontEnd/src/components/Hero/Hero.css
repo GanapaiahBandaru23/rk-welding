@@ -1,0 +1,124 @@
+.hero {
+  min-height: 100vh;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  background-image:
+    url("/images/hero/hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.3)
+    );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+
+  padding-top: 80px;
+}
+
+.hero-location {
+  color: #f59e0b;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  max-width: 800px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(48px, 7vw, 90px);
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  margin-bottom: 25px;
+}
+
+.hero h1 span {
+  color: #f59e0b;
+}
+
+.hero-description {
+  max-width: 600px;
+
+  color: #d4d4d4;
+
+  font-size: 18px;
+  line-height: 1.7;
+
+  margin-bottom: 35px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-primary-button,
+.hero-secondary-button {
+  padding: 14px 24px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+}
+
+.hero-primary-button {
+  background: #f59e0b;
+  color: #000;
+}
+
+.hero-primary-button:hover {
+  background: #ffffff;
+}
+
+.hero-secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+.hero-secondary-button:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 90vh;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+}

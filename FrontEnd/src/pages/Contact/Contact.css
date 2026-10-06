@@ -1,0 +1,1098 @@
+/* =========================
+   CONTACT PAGE
+========================= */
+
+.contact-page {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.contact-hero {
+  min-height: 72vh;
+
+  display: flex;
+  align-items: center;
+
+  padding-top: 140px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.95),
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.9)
+    ),
+    url("/images/hero/hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+.contact-hero-label {
+  margin-bottom: 18px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.contact-hero h1 {
+  max-width: 850px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(45px, 7vw, 86px);
+
+  line-height: 1.02;
+
+  letter-spacing: -2px;
+}
+
+.contact-hero h1 span {
+  color: #f59e0b;
+}
+
+.contact-hero-description {
+  max-width: 620px;
+
+  margin-top: 28px;
+
+  color: #b5b5b5;
+
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   CONTACT OPTIONS
+========================= */
+
+.contact-options {
+  padding: 110px 0;
+}
+
+.contact-heading {
+  max-width: 720px;
+
+  margin-bottom: 55px;
+}
+
+.contact-heading > p:first-child {
+  margin-bottom: 12px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.contact-heading h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(34px, 5vw, 58px);
+
+  line-height: 1.1;
+}
+
+.contact-heading h2 span {
+  color: #f59e0b;
+}
+
+.contact-heading-description {
+  margin-top: 18px;
+
+  color: #999999;
+
+  font-size: 16px;
+}
+
+
+/* =========================
+   CONTACT CARDS
+========================= */
+
+.contact-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.contact-card {
+  padding: 32px 26px;
+
+  background: #141414;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-7px);
+
+  border-color: rgba(245, 158, 11, 0.5);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.contact-card-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 25px;
+
+  background: rgba(245, 158, 11, 0.1);
+
+  border: 1px solid rgba(245, 158, 11, 0.25);
+
+  border-radius: 6px;
+
+  font-size: 22px;
+}
+
+.contact-card-label {
+  margin-bottom: 8px;
+
+  color: #f59e0b;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.contact-card h3 {
+  margin-bottom: 12px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 20px;
+}
+
+.contact-card > p:not(.contact-card-label) {
+  min-height: 72px;
+
+  margin-bottom: 22px;
+
+  color: #999999;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.contact-card-button {
+  display: inline-block;
+
+  padding: 11px 15px;
+
+  border: 1px solid #f59e0b;
+
+  border-radius: 5px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.contact-card-button:hover {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.contact-card-button.whatsapp {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.contact-card-button.whatsapp:hover {
+  background: #ffffff;
+
+  border-color: #ffffff;
+}
+
+
+/* =========================
+   LOCATION
+========================= */
+
+.contact-location {
+  padding: 110px 0;
+
+  background: #101010;
+}
+
+.location-layout {
+  display: grid;
+
+  grid-template-columns:
+    0.85fr 1.15fr;
+
+  gap: 70px;
+
+  align-items: center;
+}
+
+.location-content {
+  max-width: 600px;
+}
+
+.location-label {
+  margin-bottom: 14px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.location-content h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(38px, 5vw, 60px);
+
+  line-height: 1.1;
+}
+
+.location-content h2 span {
+  color: #f59e0b;
+}
+
+.location-content > p:not(.location-label) {
+  margin-top: 22px;
+
+  max-width: 520px;
+
+  color: #999999;
+
+  line-height: 1.8;
+}
+
+.location-details {
+  margin-top: 35px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.location-detail {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding-bottom: 15px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+.location-detail span {
+  color: #777777;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+}
+
+.location-detail strong {
+  color: #ffffff;
+
+  font-size: 15px;
+}
+
+.location-button {
+  display: inline-block;
+
+  margin-top: 30px;
+
+  padding: 13px 20px;
+
+  background: #f59e0b;
+
+  border-radius: 5px;
+
+  color: #000000;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition: background 0.3s ease;
+}
+
+.location-button:hover {
+  background: #ffffff;
+}
+
+.location-map {
+  width: 100%;
+
+  min-height: 500px;
+
+  overflow: hidden;
+
+  background: #151515;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+}
+
+.location-map iframe {
+  width: 100%;
+  height: 500px;
+
+  display: block;
+
+  border: 0;
+
+  filter:
+    grayscale(100%)
+    contrast(1.1);
+}
+
+
+/* =========================
+   PERSON BEHIND RK WELDING
+========================= */
+
+.contact-owner {
+  padding: 110px 0;
+
+  background: #0a0a0a;
+}
+
+.owner-layout {
+  display: grid;
+
+  grid-template-columns:
+    0.85fr 1.15fr;
+
+  gap: 80px;
+
+  align-items: center;
+}
+
+
+/* =========================
+   OWNER IMAGE
+========================= */
+
+.owner-image {
+  width: 100%;
+
+  max-width: 500px;
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: #151515;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+
+  position: relative;
+}
+
+.owner-image::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 60%,
+      rgba(0, 0, 0, 0.35)
+    );
+}
+
+.owner-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.5s ease;
+}
+
+.owner-image:hover img {
+  transform: scale(1.03);
+}
+
+
+/* =========================
+   OWNER CONTENT
+========================= */
+
+.owner-content {
+  max-width: 620px;
+}
+
+.owner-label {
+  margin-bottom: 15px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.owner-content h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(38px, 5vw, 60px);
+
+  line-height: 1.08;
+
+  letter-spacing: -1px;
+}
+
+.owner-content h2 span {
+  color: #f59e0b;
+}
+
+.owner-content h3 {
+  margin-top: 32px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 24px;
+}
+
+.owner-role {
+  margin-top: 5px;
+
+  color: #f59e0b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+.owner-description {
+  margin-top: 22px;
+
+  color: #999999;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   OWNER BUTTONS
+========================= */
+
+.owner-buttons {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 30px;
+}
+
+.owner-call-button,
+.owner-whatsapp-button {
+  padding: 13px 21px;
+
+  border-radius: 5px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.owner-call-button {
+  border:
+    1px solid #f59e0b;
+
+  color: #f59e0b;
+}
+
+.owner-whatsapp-button {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.owner-call-button:hover {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.owner-whatsapp-button:hover {
+  background: #ffffff;
+}
+
+
+/* =========================
+   CONTACT SERVICES
+========================= */
+
+.contact-services {
+  padding: 110px 0;
+
+  background: #101010;
+}
+
+.contact-services-heading {
+  max-width: 700px;
+
+  margin-bottom: 55px;
+}
+
+.contact-services-heading p {
+  margin-bottom: 12px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.contact-services-heading h2 {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(35px, 5vw, 58px);
+
+  line-height: 1.1;
+}
+
+.contact-services-heading h2 span {
+  color: #f59e0b;
+}
+
+.contact-services-heading > span {
+  display: block;
+
+  margin-top: 18px;
+
+  color: #999999;
+
+  font-size: 16px;
+}
+
+.contact-services-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.contact-service-item {
+  padding: 30px;
+
+  background: #141414;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 7px;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.contact-service-item:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(245, 158, 11, 0.4);
+}
+
+.contact-service-item > span {
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.contact-service-item h3 {
+  margin-top: 25px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 21px;
+}
+
+.contact-service-item p {
+  margin-top: 10px;
+
+  color: #8f8f8f;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   DESIGN ENQUIRY
+========================= */
+
+.design-enquiry {
+  padding: 100px 0;
+
+  background: #0a0a0a;
+}
+
+.design-enquiry-box {
+  padding: 80px 50px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(245, 158, 11, 0.08),
+      rgba(255, 255, 255, 0.02)
+    );
+
+  border:
+    1px solid rgba(245, 158, 11, 0.18);
+
+  border-radius: 10px;
+}
+
+.design-enquiry-box > p:first-child {
+  color: #f59e0b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.design-enquiry-box h2 {
+  margin-top: 18px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(38px, 5vw, 65px);
+
+  line-height: 1.05;
+}
+
+.design-enquiry-box h2 span {
+  color: #f59e0b;
+}
+
+.design-enquiry-description {
+  max-width: 650px;
+
+  margin: 25px auto 0;
+
+  color: #999999;
+
+  line-height: 1.8;
+}
+
+.design-enquiry-buttons {
+  margin-top: 35px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.design-whatsapp-button,
+.design-call-button {
+  padding: 13px 22px;
+
+  border-radius: 5px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.design-whatsapp-button {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.design-call-button {
+  border:
+    1px solid #f59e0b;
+
+  color: #f59e0b;
+}
+
+.design-whatsapp-button:hover {
+  background: #ffffff;
+}
+
+.design-call-button:hover {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+
+/* =========================
+   FINAL CTA
+========================= */
+
+.contact-final-cta {
+  padding: 110px 0;
+
+  text-align: center;
+
+  background: #101010;
+}
+
+.contact-final-cta > .container > p:first-child {
+  color: #f59e0b;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+.contact-final-cta h2 {
+  margin-top: 15px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(38px, 6vw, 70px);
+
+  line-height: 1.05;
+}
+
+.contact-final-cta h2 span {
+  color: #f59e0b;
+}
+
+.contact-final-cta h2 + p {
+  margin-top: 20px;
+
+  color: #999999;
+}
+
+.contact-final-buttons {
+  margin-top: 30px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.final-call-button,
+.final-whatsapp-button {
+  padding: 13px 25px;
+
+  border-radius: 5px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.final-call-button {
+  border:
+    1px solid #f59e0b;
+
+  color: #f59e0b;
+}
+
+.final-whatsapp-button {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.final-call-button:hover {
+  background: #f59e0b;
+
+  color: #000000;
+}
+
+.final-whatsapp-button:hover {
+  background: #ffffff;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .contact-cards {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .location-layout {
+    grid-template-columns: 1fr;
+
+    gap: 50px;
+  }
+
+  .location-content {
+    max-width: 700px;
+  }
+
+  .owner-layout {
+    grid-template-columns: 1fr;
+
+    gap: 55px;
+  }
+
+  .owner-image {
+    max-width: 480px;
+
+    margin: 0 auto;
+  }
+
+  .owner-content {
+    max-width: 100%;
+  }
+
+  .contact-services-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .contact-hero {
+    min-height: 65vh;
+
+    padding-top: 120px;
+  }
+
+  .contact-hero h1 {
+    letter-spacing: -1px;
+  }
+
+  .contact-hero-description {
+    font-size: 15px;
+  }
+
+
+  .contact-options,
+  .contact-location,
+  .contact-owner,
+  .contact-services {
+    padding: 80px 0;
+  }
+
+
+  /* Contact Cards */
+
+  .contact-cards {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .contact-card {
+    padding: 28px 22px;
+  }
+
+  .contact-card > p:not(.contact-card-label) {
+    min-height: auto;
+  }
+
+
+  /* Location */
+
+  .location-map {
+    min-height: 350px;
+  }
+
+  .location-map iframe {
+    height: 350px;
+  }
+
+
+  /* Owner */
+
+  .owner-image {
+    width: 100%;
+
+    max-width: 100%;
+
+    aspect-ratio: 4 / 5;
+  }
+
+  .owner-content h2 {
+    font-size: 38px;
+  }
+
+  .owner-content h3 {
+    font-size: 21px;
+  }
+
+  .owner-description {
+    font-size: 14px;
+  }
+
+  .owner-buttons {
+    flex-direction: column;
+  }
+
+  .owner-call-button,
+  .owner-whatsapp-button {
+    width: 100%;
+
+    text-align: center;
+  }
+
+
+  /* Services */
+
+  .contact-services-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+
+  /* Design Enquiry */
+
+  .design-enquiry {
+    padding: 70px 0;
+  }
+
+  .design-enquiry-box {
+    padding: 55px 22px;
+  }
+
+  .design-enquiry-buttons {
+    flex-direction: column;
+  }
+
+  .design-whatsapp-button,
+  .design-call-button {
+    width: 100%;
+
+    text-align: center;
+  }
+
+
+  /* Final CTA */
+
+  .contact-final-cta {
+    padding: 80px 0;
+  }
+
+  .contact-final-buttons {
+    flex-direction: column;
+  }
+
+  .final-call-button,
+  .final-whatsapp-button {
+    width: 100%;
+
+    text-align: center;
+  }
+}
+
+
+/* =========================
+   EXTRA SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .contact-hero h1 {
+    font-size: 40px;
+  }
+
+  .contact-heading h2,
+  .location-content h2,
+  .contact-services-heading h2 {
+    font-size: 34px;
+  }
+
+  .owner-content h2 {
+    font-size: 34px;
+  }
+
+  .design-enquiry-box h2 {
+    font-size: 36px;
+  }
+
+  .contact-final-cta h2 {
+    font-size: 36px;
+  }
+}

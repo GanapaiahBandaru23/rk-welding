@@ -1,0 +1,25 @@
+.section-title {
+  max-width: 700px;
+}
+
+.section-title-label {
+  color: #f59e0b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+}
+
+.section-title h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.section-title-description {
+  color: #a3a3a3;
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 600px;
+}

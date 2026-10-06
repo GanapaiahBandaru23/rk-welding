@@ -1,0 +1,136 @@
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 60px;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 45px;
+  border: 1px solid #292929;
+  border-radius: 16px;
+  background: #111;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.admin-login-header {
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.admin-login-label {
+  margin: 0 0 12px;
+  color: #d4af37;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.admin-login-header h1 {
+  margin: 0 0 12px;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.admin-login-header p:last-child {
+  margin: 0;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.admin-form-group label {
+  color: #ddd;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-form-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  outline: none;
+  background: #0b0b0b;
+  color: #fff;
+  font-size: 15px;
+  transition: 0.3s ease;
+}
+
+.admin-form-group input::placeholder {
+  color: #666;
+}
+
+.admin-form-group input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+}
+
+.admin-login-button {
+  width: 100%;
+  margin-top: 5px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #d4af37;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.admin-login-button:hover {
+  background: #e3c35c;
+  transform: translateY(-2px);
+}
+
+.admin-login-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #292929;
+  text-align: center;
+}
+
+.admin-login-footer p {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .admin-login-page {
+    padding: 100px 15px 40px;
+  }
+
+  .admin-login-card {
+    padding: 30px 22px;
+  }
+
+  .admin-login-header h1 {
+    font-size: 30px;
+  }
+}
