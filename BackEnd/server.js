@@ -15,7 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
-// Test route
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -23,7 +22,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// Test database connection
 app.get("/test-db", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT 1 AS result");
@@ -39,16 +37,19 @@ app.get("/test-db", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Database connection failed",
+      error: error.code,
+      errorNumber: error.errno,
+      syscall: error.syscall,
     });
   }
 });
 
-// Admin routes
 app.use("/api/admin", adminRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/works", workRoutes);
 app.use("/api/work-images", workImageRoutes);
 app.use("/api/work-videos", workVideoRoutes);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
