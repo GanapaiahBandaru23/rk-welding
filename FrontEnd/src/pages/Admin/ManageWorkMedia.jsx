@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./ManageWorkMedia.css";
 
-const API_BASE_URL = "http://https://rk-welding-backend.onrender.com";
+const API_BASE_URL = "https://rk-welding-backend.onrender.com";
 
 function ManageWorkMedia() {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ function ManageWorkMedia() {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
-
 
   // LOAD WORK + PHOTOS + VIDEOS
   const loadWorkMedia = async () => {
@@ -39,7 +38,8 @@ function ManageWorkMedia() {
 
       const selectedWork = worksData.works.find(
         (item) =>
-          item.work_id.trim() === workId.trim()
+          String(item.work_id).trim() ===
+          String(workId).trim()
       );
 
       if (!selectedWork) {
@@ -50,7 +50,6 @@ function ManageWorkMedia() {
 
       setWork(selectedWork);
 
-
       // GET IMAGES
       const imageResponse = await fetch(
         `${API_BASE_URL}/api/work-images/${selectedWork.id}`
@@ -60,8 +59,9 @@ function ManageWorkMedia() {
 
       if (imageData.success) {
         setImages(imageData.images || []);
+      } else {
+        setImages([]);
       }
-
 
       // GET VIDEOS
       const videoResponse = await fetch(
@@ -72,8 +72,9 @@ function ManageWorkMedia() {
 
       if (videoData.success) {
         setVideos(videoData.videos || []);
+      } else {
+        setVideos([]);
       }
-
     } catch (error) {
       console.error(
         "Work media loading error:",
@@ -88,11 +89,9 @@ function ManageWorkMedia() {
     }
   };
 
-
   useEffect(() => {
     loadWorkMedia();
   }, [workId]);
-
 
   // IMAGE SELECT
   const handleImageChange = (event) => {
@@ -130,7 +129,6 @@ function ManageWorkMedia() {
     setSelectedImage(file);
   };
 
-
   // VIDEO SELECT
   const handleVideoChange = (event) => {
     const file = event.target.files[0];
@@ -167,7 +165,6 @@ function ManageWorkMedia() {
 
     setSelectedVideo(file);
   };
-
 
   // UPLOAD IMAGE
   const handleImageUpload = async () => {
@@ -237,7 +234,6 @@ function ManageWorkMedia() {
       setSelectedImage(null);
 
       await loadWorkMedia();
-
     } catch (error) {
       console.error(
         "Image upload error:",
@@ -251,7 +247,6 @@ function ManageWorkMedia() {
       setUploadingImage(false);
     }
   };
-
 
   // DELETE IMAGE
   const handleDeleteImage = async (imageId) => {
@@ -304,7 +299,6 @@ function ManageWorkMedia() {
       );
 
       await loadWorkMedia();
-
     } catch (error) {
       console.error(
         "Delete image error:",
@@ -316,7 +310,6 @@ function ManageWorkMedia() {
       );
     }
   };
-
 
   // UPLOAD VIDEO
   const handleVideoUpload = async () => {
@@ -387,7 +380,6 @@ function ManageWorkMedia() {
       setSelectedVideo(null);
 
       await loadWorkMedia();
-
     } catch (error) {
       console.error(
         "Video upload error:",
@@ -401,7 +393,6 @@ function ManageWorkMedia() {
       setUploadingVideo(false);
     }
   };
-
 
   // DELETE VIDEO
   const handleDeleteVideo = async (videoId) => {
@@ -454,7 +445,6 @@ function ManageWorkMedia() {
       );
 
       await loadWorkMedia();
-
     } catch (error) {
       console.error(
         "Delete video error:",
@@ -467,32 +457,24 @@ function ManageWorkMedia() {
     }
   };
 
-
   // LOADING
   if (loading) {
     return (
       <main className="manage-work-media-page">
-
         <div className="manage-work-media-container">
-
           <p>
             Loading work...
           </p>
-
         </div>
-
       </main>
     );
   }
-
 
   // WORK NOT FOUND
   if (!work) {
     return (
       <main className="manage-work-media-page">
-
         <div className="manage-work-media-container">
-
           <h1>
             Work not found
           </h1>
@@ -507,19 +489,14 @@ function ManageWorkMedia() {
           >
             Back to Manage Works
           </button>
-
         </div>
-
       </main>
     );
   }
 
-
   return (
     <main className="manage-work-media-page">
-
       <div className="manage-work-media-container">
-
 
         {/* BACK BUTTON */}
 
@@ -535,11 +512,9 @@ function ManageWorkMedia() {
           ← Back to Manage Works
         </button>
 
-
         {/* WORK HEADER */}
 
         <div className="media-header">
-
           <p>
             {work.work_id}
           </p>
@@ -551,14 +526,11 @@ function ManageWorkMedia() {
           <span>
             {work.category_name}
           </span>
-
         </div>
-
 
         {/* ADD PHOTOS */}
 
         <section className="media-section">
-
           <h2>
             Add Photos
           </h2>
@@ -568,7 +540,6 @@ function ManageWorkMedia() {
           </p>
 
           <div className="upload-box">
-
             <input
               type="file"
               accept="image/jpeg,image/jpg,image/png,image/webp"
@@ -594,37 +565,27 @@ function ManageWorkMedia() {
                 ? "Uploading..."
                 : "Add Photo"}
             </button>
-
           </div>
-
         </section>
-
 
         {/* EXISTING PHOTOS */}
 
         <section className="media-section">
-
           <h2>
             Existing Photos
           </h2>
 
           {images.length === 0 ? (
-
             <p className="empty-media">
               No photos added yet.
             </p>
-
           ) : (
-
             <div className="media-image-grid">
-
               {images.map((image) => (
-
                 <div
                   className="media-image-card"
                   key={image.id}
                 >
-
                   <img
                     src={
                       image.image_url.startsWith("http")
@@ -645,22 +606,15 @@ function ManageWorkMedia() {
                   >
                     Delete Photo
                   </button>
-
                 </div>
-
               ))}
-
             </div>
-
           )}
-
         </section>
-
 
         {/* ADD VIDEOS */}
 
         <section className="media-section">
-
           <h2>
             Add Videos
           </h2>
@@ -670,7 +624,6 @@ function ManageWorkMedia() {
           </p>
 
           <div className="upload-box">
-
             <input
               type="file"
               accept="video/mp4,video/webm,video/quicktime,video/x-msvideo,video/x-matroska"
@@ -696,43 +649,32 @@ function ManageWorkMedia() {
                 ? "Uploading..."
                 : "Add Video"}
             </button>
-
           </div>
-
         </section>
-
 
         {/* EXISTING VIDEOS */}
 
         <section className="media-section">
-
           <h2>
             Existing Videos
           </h2>
 
           {videos.length === 0 ? (
-
             <p className="empty-media">
               No videos added yet.
             </p>
-
           ) : (
-
             <div className="media-video-grid">
-
               {videos.map((video) => (
-
                 <div
                   className="media-video-card"
                   key={video.id}
                 >
-
                   <video
                     controls
                     preload="metadata"
                     width="100%"
                   >
-
                     <source
                       src={
                         video.video_url.startsWith("http")
@@ -743,7 +685,6 @@ function ManageWorkMedia() {
 
                     Your browser does not
                     support the video tag.
-
                   </video>
 
                   {video.title && (
@@ -763,19 +704,13 @@ function ManageWorkMedia() {
                   >
                     Delete Video
                   </button>
-
                 </div>
-
               ))}
-
             </div>
-
           )}
-
         </section>
 
       </div>
-
     </main>
   );
 }

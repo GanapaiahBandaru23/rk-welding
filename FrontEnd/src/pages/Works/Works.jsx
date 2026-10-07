@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import { getWorks } from "../../api/worksApi";
 import "./Works.css";
 
@@ -7,6 +10,8 @@ const API_BASE_URL =
   "https://rk-welding-backend.onrender.com";
 
 const Works = () => {
+  const navigate = useNavigate();
+
   const [works, setWorks] = useState([]);
   const [activeCategory, setActiveCategory] =
     useState("All");
@@ -67,6 +72,16 @@ const Works = () => {
       <section className="works-hero">
 
         <div className="container">
+
+          {/* BACK BUTTON */}
+
+          <button
+            type="button"
+            className="works-back-button"
+            onClick={() => navigate(-1)}
+          >
+            ← Back
+          </button>
 
           <p className="section-label">
             OUR WORK
