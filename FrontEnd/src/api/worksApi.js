@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://rk-welding-backend.onrender.com/api";
 
 // Get all works
 export const getWorks = async () => {
