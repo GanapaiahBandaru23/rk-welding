@@ -62,12 +62,12 @@ function Footer() {
 
             <h3>Contact Us</h3>
 
-            <a href="tel:+919999999999">
+            <a href="tel:+917036903065">
               📞 Call RK Welding
             </a>
 
             <a
-              href="https://wa.me/919999999999"
+              href="https://wa.me/917036903065"
               target="_blank"
               rel="noreferrer"
             >

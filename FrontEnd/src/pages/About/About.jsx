@@ -217,14 +217,14 @@ function About() {
             <div className="about-cta-buttons">
 
               <a
-                href="tel:+919999999999"
+                href="tel:+917036903065"
                 className="about-call-button"
               >
                 Call RK Welding
               </a>
 
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/917036903065"
                 target="_blank"
                 rel="noreferrer"
                 className="about-whatsapp-button"

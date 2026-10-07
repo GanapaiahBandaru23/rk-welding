@@ -27,7 +27,7 @@ function AddWork() {
     const loadCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/categories"
+          "https://rk-welding-backend.onrender.com/api/categories"
         );
 
         const data = await response.json();
@@ -142,7 +142,7 @@ function AddWork() {
       // ==========================================
 
       const workResponse = await fetch(
-        "http://localhost:5000/api/works",
+        "https://rk-welding-backend.onrender.com/api/works",
         {
           method: "POST",
           headers: {
@@ -190,7 +190,7 @@ function AddWork() {
         );
 
         const imageResponse = await fetch(
-          "http://localhost:5000/api/work-images",
+          "https://rk-welding-backend.onrender.com/api/work-images",
           {
             method: "POST",
             headers: {
@@ -239,7 +239,7 @@ function AddWork() {
         );
 
         const videoResponse = await fetch(
-          "http://localhost:5000/api/work-videos",
+          "https://rk-welding-backend.onrender.com/api/work-videos",
           {
             method: "POST",
             headers: {

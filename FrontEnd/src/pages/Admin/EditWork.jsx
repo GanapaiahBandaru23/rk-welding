@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./EditWork.css";
 
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL =
+  "https://rk-welding-backend.onrender.com";
 
 function EditWork() {
   const navigate = useNavigate();
@@ -37,7 +38,10 @@ function EditWork() {
         return;
       }
 
-      // Get all works
+      // ========================================
+      // GET ALL WORKS
+      // ========================================
+
       const worksResponse = await fetch(
         `${API_BASE_URL}/api/works`
       );
@@ -45,28 +49,42 @@ function EditWork() {
       const worksData =
         await worksResponse.json();
 
-      if (!worksData.success) {
-        alert("Unable to load works.");
+      if (!worksResponse.ok || !worksData.success) {
+        alert(
+          worksData.message ||
+            "Unable to load works."
+        );
         return;
       }
+
+      // ========================================
+      // FIND SELECTED WORK
+      // ========================================
 
       const selectedWork =
         worksData.works.find(
           (item) =>
-            item.work_id.trim() ===
-            workId.trim()
+            String(item.work_id).trim() ===
+            String(workId).trim()
         );
 
       if (!selectedWork) {
         alert("Work not found.");
+
         navigate("/admin/manage-works");
+
         return;
       }
 
       setWork(selectedWork);
 
-      // Fill existing data
-      setTitle(selectedWork.title || "");
+      // ========================================
+      // FILL EXISTING DATA
+      // ========================================
+
+      setTitle(
+        selectedWork.title || ""
+      );
 
       setCategoryId(
         selectedWork.category_id
@@ -90,7 +108,10 @@ function EditWork() {
         selectedWork.description || ""
       );
 
-      // Get categories
+      // ========================================
+      // GET CATEGORIES
+      // ========================================
+
       const categoriesResponse =
         await fetch(
           `${API_BASE_URL}/api/categories`
@@ -99,12 +120,14 @@ function EditWork() {
       const categoriesData =
         await categoriesResponse.json();
 
-      if (categoriesData.success) {
+      if (
+        categoriesResponse.ok &&
+        categoriesData.success
+      ) {
         setCategories(
           categoriesData.categories || []
         );
       }
-
     } catch (error) {
       console.error(
         "Edit work loading error:",
@@ -119,6 +142,9 @@ function EditWork() {
     }
   };
 
+  // ========================================
+  // LOAD DATA ON PAGE LOAD
+  // ========================================
   useEffect(() => {
     loadData();
   }, [workId]);
@@ -147,7 +173,9 @@ function EditWork() {
 
       if (!token) {
         alert("Admin login required.");
+
         navigate("/admin/login");
+
         return;
       }
 
@@ -192,7 +220,6 @@ function EditWork() {
       );
 
       navigate("/admin/manage-works");
-
     } catch (error) {
       console.error(
         "Update work error:",
@@ -227,7 +254,6 @@ function EditWork() {
     return (
       <main className="edit-work-page">
         <div className="edit-work-container">
-
           <h1>
             Work not found
           </h1>
@@ -242,7 +268,6 @@ function EditWork() {
           >
             Back to Manage Works
           </button>
-
         </div>
       </main>
     );
@@ -253,10 +278,10 @@ function EditWork() {
   // ========================================
   return (
     <main className="edit-work-page">
-
       <div className="edit-work-container">
 
         {/* BACK BUTTON */}
+
         <button
           type="button"
           className="edit-back-button"
@@ -269,10 +294,9 @@ function EditWork() {
           ← Back to Manage Works
         </button>
 
-
         {/* HEADER */}
-        <div className="edit-work-header">
 
+        <div className="edit-work-header">
           <p className="edit-work-id">
             {work.work_id}
           </p>
@@ -284,19 +308,18 @@ function EditWork() {
           <p>
             Update the details of this work.
           </p>
-
         </div>
 
-
         {/* FORM */}
+
         <form
           className="edit-work-form"
           onSubmit={handleSubmit}
         >
 
           {/* WORK ID */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Work ID
             </label>
@@ -306,13 +329,11 @@ function EditWork() {
               value={work.work_id}
               disabled
             />
-
           </div>
 
-
           {/* TITLE */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Work Title
             </label>
@@ -322,16 +343,16 @@ function EditWork() {
               placeholder="Example: Modern Main Gate"
               value={title}
               onChange={(event) =>
-                setTitle(event.target.value)
+                setTitle(
+                  event.target.value
+                )
               }
             />
-
           </div>
 
-
           {/* CATEGORY */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Category
             </label>
@@ -344,7 +365,6 @@ function EditWork() {
                 )
               }
             >
-
               <option value="">
                 Select Category
               </option>
@@ -359,15 +379,12 @@ function EditWork() {
                   </option>
                 )
               )}
-
             </select>
-
           </div>
 
-
           {/* WORK TYPE */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Work Type
             </label>
@@ -382,13 +399,11 @@ function EditWork() {
                 )
               }
             />
-
           </div>
 
-
           {/* SIZE */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Size
             </label>
@@ -403,13 +418,11 @@ function EditWork() {
                 )
               }
             />
-
           </div>
 
-
           {/* LOCATION */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Location
             </label>
@@ -424,13 +437,11 @@ function EditWork() {
                 )
               }
             />
-
           </div>
 
-
           {/* DESCRIPTION */}
-          <div className="form-group">
 
+          <div className="form-group">
             <label>
               Description
             </label>
@@ -445,12 +456,13 @@ function EditWork() {
                 )
               }
             />
-
           </div>
 
-
           {/* BUTTONS */}
+
           <div className="edit-work-actions">
+
+            {/* CANCEL */}
 
             <button
               type="button"
@@ -464,6 +476,7 @@ function EditWork() {
               Cancel
             </button>
 
+            {/* UPDATE */}
 
             <button
               type="submit"
@@ -476,11 +489,8 @@ function EditWork() {
             </button>
 
           </div>
-
         </form>
-
       </div>
-
     </main>
   );
 }

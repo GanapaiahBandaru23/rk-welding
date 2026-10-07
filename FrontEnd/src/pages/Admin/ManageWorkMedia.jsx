@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./ManageWorkMedia.css";
 
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "http://https://rk-welding-backend.onrender.com";
 
 function ManageWorkMedia() {
   const navigate = useNavigate();

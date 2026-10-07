@@ -88,7 +88,7 @@ function Videos() {
                   </p>
 
                   <a
-                    href="https://wa.me/919999999999?text=Hi%20RK%20Welding%2C%20I%20saw%20your%20Iron%20Staircase%20work%20and%20I%20am%20interested%20in%20a%20similar%20work."
+                    href="https://wa.me/917036903065?text=Hi%20RK%20Welding%2C%20I%20saw%20your%20Iron%20Staircase%20work%20and%20I%20am%20interested%20in%20a%20similar%20work."
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -135,7 +135,7 @@ function Videos() {
                   </p>
 
                   <a
-                    href="https://wa.me/919999999999?text=Hi%20RK%20Welding%2C%20I%20saw%20your%20Shop%20Rolling%20Shutter%20work%20and%20I%20am%20interested%20in%20a%20similar%20work."
+                    href="https://wa.me/917036903065?text=Hi%20RK%20Welding%2C%20I%20saw%20your%20Shop%20Rolling%20Shutter%20work%20and%20I%20am%20interested%20in%20a%20similar%20work."
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -219,14 +219,14 @@ function Videos() {
             <div className="videos-cta-buttons">
 
               <a
-                href="tel:+919999999999"
+                href="tel:+917036903065"
                 className="videos-call-button"
               >
                 Call RK Welding
               </a>
 
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/917036903065"
                 target="_blank"
                 rel="noreferrer"
                 className="videos-whatsapp-button"

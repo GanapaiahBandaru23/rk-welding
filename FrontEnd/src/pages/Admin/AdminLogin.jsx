@@ -20,7 +20,7 @@ function AdminLogin() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/login",
+        "https://rk-welding-backend.onrender.com/api/admin/login",
         {
           method: "POST",
           headers: {
@@ -45,7 +45,6 @@ function AdminLogin() {
 
       // Go to Admin Dashboard
       navigate("/admin");
-
     } catch (error) {
       console.error("Admin login error:", error);
 
@@ -59,25 +58,19 @@ function AdminLogin() {
 
   return (
     <main className="admin-login-page">
-
       <div className="admin-login-card">
 
         <div className="admin-login-header">
-
           <p className="admin-login-label">
             RK WELDING
           </p>
 
-          <h1>
-            Admin Login
-          </h1>
+          <h1>Admin Login</h1>
 
           <p>
             Sign in to manage welding works and portfolio content.
           </p>
-
         </div>
-
 
         <form
           className="admin-login-form"
@@ -85,7 +78,6 @@ function AdminLogin() {
         >
 
           <div className="admin-form-group">
-
             <label htmlFor="email">
               Email
             </label>
@@ -100,12 +92,9 @@ function AdminLogin() {
               }
               required
             />
-
           </div>
 
-
           <div className="admin-form-group">
-
             <label htmlFor="password">
               Password
             </label>
@@ -120,9 +109,7 @@ function AdminLogin() {
               }
               required
             />
-
           </div>
-
 
           {error && (
             <p
@@ -137,7 +124,6 @@ function AdminLogin() {
             </p>
           )}
 
-
           <button
             type="submit"
             className="admin-login-button"
@@ -150,17 +136,13 @@ function AdminLogin() {
 
         </form>
 
-
         <div className="admin-login-footer">
-
           <p>
             RK Welding • Konijerla
           </p>
-
         </div>
 
       </div>
-
     </main>
   );
 }
